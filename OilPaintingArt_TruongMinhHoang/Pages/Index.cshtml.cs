@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories;
 
-namespace OilPaintingArt_TruongMinhHoang.Pages
+namespace BookStore_TruongMinhHoang.Pages
 {
     public class IndexModel : PageModel
     {
@@ -11,25 +11,25 @@ namespace OilPaintingArt_TruongMinhHoang.Pages
         [BindProperty]
         public string password { get; set; }
 
-        private readonly ISystemAccountRepo systemAccountRepo;  
-        public IndexModel(ISystemAccountRepo systemAccountRepo)
+        private readonly IAccountRepo _accountRepo;  
+        public IndexModel(IAccountRepo accountRepo)
         {
-            this.systemAccountRepo = systemAccountRepo;
+            _accountRepo = accountRepo;
         }
-        public async Task OnPost()  
+        public async Task OnPost()
         {
             try
             {
-                var account = await systemAccountRepo.Login(email, password);
-                if(account != null && (account.Role == 2 || account.Role == 3))
+                var account = await _accountRepo.Login(email, password);
+                if (account != null)
                 {
-                    TempData["Message"] = "Login successfully"; 
+                    TempData["Message"] = "Login successfully";
                     Response.Redirect("/OilPaintingArtPage");
                 }
                 else
                 {
 
-                   TempData["Message"] = "You do not have permission to do this function!";
+                    TempData["Message"] = "You do not have permission to do this function!";
                     Response.Redirect("/");
                 }
             }

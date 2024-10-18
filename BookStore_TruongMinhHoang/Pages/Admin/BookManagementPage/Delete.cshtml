@@ -1,0 +1,87 @@
+﻿@page
+@model BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete Book";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Delete Book</h1>
+    <h3 class="text-danger text-center">Are you sure you want to delete this book?</h3>
+
+    <div class="card shadow mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Book Details</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.Title)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.Title)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.Isbn)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.Isbn)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.Description)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.Description)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.Price)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.Price)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.Stock)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.Stock)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.PublicationDate)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.PublicationDate)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.Genre)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.Genre)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.IsActive)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.IsActive)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.Author)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.Author.FirstName)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Book.Publisher)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Book.Publisher.PublisherName)
+                </dd>
+            </dl>
+
+            <form method="post" class="text-center">
+                <input type="hidden" asp-for="Book.BookId" />
+                <input type="submit" value="Delete" class="btn btn-danger btn-lg" />
+                <a asp-page="./Index" class="btn btn-outline-secondary btn-lg ms-3">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>

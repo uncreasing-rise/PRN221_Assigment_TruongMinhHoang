@@ -1,0 +1,94 @@
+﻿@page
+@model BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage.CreateModel
+
+@{
+    ViewData["Title"] = "Create Book";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Create a New Book</h1>
+    <hr />
+
+    <div class="card shadow">
+        <div class="card-header">
+            <h5 class="mb-0">Book Details</h5>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Book.Title" class="control-label"></label>
+                    <input asp-for="Book.Title" class="form-control" placeholder="Enter book title" />
+                    <span asp-validation-for="Book.Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Book.Isbn" class="control-label"></label>
+                    <input asp-for="Book.Isbn" class="form-control" placeholder="Enter ISBN" />
+                    <span asp-validation-for="Book.Isbn" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Book.Description" class="control-label"></label>
+                    <textarea asp-for="Book.Description" class="form-control" rows="3" placeholder="Enter book description"></textarea>
+                    <span asp-validation-for="Book.Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Book.Price" class="control-label"></label>
+                    <input asp-for="Book.Price" class="form-control" placeholder="Enter price" />
+                    <span asp-validation-for="Book.Price" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Book.Stock" class="control-label"></label>
+                    <input asp-for="Book.Stock" class="form-control" placeholder="Enter stock quantity" />
+                    <span asp-validation-for="Book.Stock" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Book.PublicationDate" class="control-label"></label>
+                    <input asp-for="Book.PublicationDate" class="form-control" type="date" />
+                    <span asp-validation-for="Book.PublicationDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Book.Genre" class="control-label"></label>
+                    <input asp-for="Book.Genre" class="form-control" placeholder="Enter genre" />
+                    <span asp-validation-for="Book.Genre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Book.PublisherId" class="control-label"></label>
+                    <select asp-for="Book.PublisherId" class="form-control" asp-items="ViewBag.PublisherId">
+                        <option value="">Select Publisher</option>
+                    </select>
+                    <span asp-validation-for="Book.PublisherId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Book.AuthorId" class="control-label"></label>
+                    <select asp-for="Book.AuthorId" class="form-control" asp-items="ViewBag.AuthorId">
+                        <option value="">Select Author</option>
+                    </select>
+                    <span asp-validation-for="Book.AuthorId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Create" class="btn btn-primary btn-lg" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-3 text-center">
+        <a asp-page="Index" class="btn btn-outline-secondary">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
