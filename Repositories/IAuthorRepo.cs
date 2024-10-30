@@ -1,14 +1,15 @@
 ﻿using BusinessObjects;
-using System;
+using BusinessObjects.Response;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Repositories
-{
-    public interface IAuthorRepo
-    {
+{   
+    public interface IAuthorRepo { 
         Task<List<Author>> GetAuthors();
+        Task<Author> GetAuthorById(int id);
+        Task AddAuthor(Author author);
+        Task UpdateAuthor(Author author);
+        Task DeleteAuthor(int id);
     }
 }

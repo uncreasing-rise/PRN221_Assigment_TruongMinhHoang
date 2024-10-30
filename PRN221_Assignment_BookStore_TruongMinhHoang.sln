@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObjects", "Business
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{27773306-945B-45E2-92EB-98CEF7412679}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAOs", "DAOs\DAOs.csproj", "{051CD429-A22E-43E8-9192-12EC13863BD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Daos", "DAOs\Daos.csproj", "{051CD429-A22E-43E8-9192-12EC13863BD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore_TruongMinhHoang", "BookStore_TruongMinhHoang\BookStore_TruongMinhHoang.csproj", "{14DEB301-69DF-4FF2-B518-464DF2DBC1A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStore_TruongMinhHoang", "BookStore_TruongMinhHoang\BookStore_TruongMinhHoang.csproj", "{14DEB301-69DF-4FF2-B518-464DF2DBC1A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookStoreWPF", "BookStoreWPF\BookStoreWPF.csproj", "{78D987BF-0769-4E84-A9D8-35C2D21C462D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{14DEB301-69DF-4FF2-B518-464DF2DBC1A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14DEB301-69DF-4FF2-B518-464DF2DBC1A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14DEB301-69DF-4FF2-B518-464DF2DBC1A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D987BF-0769-4E84-A9D8-35C2D21C462D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D987BF-0769-4E84-A9D8-35C2D21C462D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D987BF-0769-4E84-A9D8-35C2D21C462D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D987BF-0769-4E84-A9D8-35C2D21C462D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

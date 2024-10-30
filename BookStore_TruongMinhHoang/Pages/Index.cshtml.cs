@@ -1,16 +1,20 @@
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Repositories;
+using System.Security.Claims;
 
 namespace BookStore_TruongMinhHoang.Pages
 {
     public class IndexModel : PageModel
     {
         [BindProperty]
-        public string username { get; set; }
+        public string Username { get; set; }
 
         [BindProperty]
-        public string password { get; set; }
+        public string Password { get; set; }
 
         private readonly IAccountRepo _accountRepo;
 
@@ -19,34 +23,48 @@ namespace BookStore_TruongMinhHoang.Pages
             _accountRepo = accountRepo;
         }
 
+        public void OnGet()
+        {
+            // Any initialization logic for GET requests can go here.
+        }
+
         public async Task<IActionResult> OnPost()
         {
-            try
+            var account = await _accountRepo.Login(Username, Password);
+            if (account != null)
             {
-                var account = await _accountRepo.Login(username, password);
-                if (account != null)
-                {
-                    TempData["Message"] = "Login Success";
-                    Console.WriteLine("Login Success");
+                var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, Username),
+            new Claim(ClaimTypes.Role, account.Role) // Giả sử account.Role là "Admin"
+        };
 
-                    //set session
-                    HttpContext.Session.SetString("Username", username);
-                    //HttpContext.Session.SetInt32("RoleId", account.Role ?? default(int));
-
-                    return RedirectToPage("/OilPaintingArtPage/Index");
-                }
-                else
+                var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var authProperties = new AuthenticationProperties
                 {
-                    TempData["Message"] = "You do not have permission to do this function";
-                    return Page();
-                }
+                    IsPersistent = true // Giữ người dùng đăng nhập
+                };
+
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+
+                return RedirectToPage("/Admin/BookManagementPage/Index"); // Redirect đến trang quản lý
             }
-            catch (Exception ex)
+            else
             {
-                TempData["Message"] = ex.Message;
+                TempData["Message"] = "Invalid username or password.";
                 return Page();
             }
         }
+        public async Task<IActionResult> OnPostLogout()
+        {
+            // Clear the session
+            HttpContext.Session.Clear();
 
+            // Sign out the user
+            await HttpContext.SignOutAsync();
+
+            // Redirect to the home page or login page after logout
+            return RedirectToPage("/Index");
+        }
     }
 }

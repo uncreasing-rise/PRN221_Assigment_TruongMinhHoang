@@ -11,9 +11,9 @@ namespace BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage
     {
         private readonly IBookRepo _bookRepo;
         private readonly IAuthorRepo _authorRepo;
-        private readonly IPushlisherRepo _publisherRepo;
+        private readonly IPublisherRepo _publisherRepo;
 
-        public CreateModel(IBookRepo bookRepo, IAuthorRepo authorRepo, IPushlisherRepo publisherRepo)
+        public CreateModel(IBookRepo bookRepo, IAuthorRepo authorRepo, IPublisherRepo publisherRepo)
         {
             _bookRepo = bookRepo;
             _authorRepo = authorRepo;

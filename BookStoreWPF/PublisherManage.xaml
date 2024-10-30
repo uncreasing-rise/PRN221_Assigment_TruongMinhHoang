@@ -1,0 +1,60 @@
+﻿<Window x:Class="BookStoreWPF.PublisherManage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookStoreWPF"
+        mc:Ignorable="d"
+        Title="Manage Publishers" Height="450" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Input Fields for Publisher Details -->
+        <StackPanel Grid.Row="0" Margin="0,10">
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Publisher Name" Foreground="#555" FontWeight="Bold"/>
+                <TextBox Name="PublisherNameTextBox" Height="30" Padding="5" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Contact Email" Foreground="#555" FontWeight="Bold"/>
+                <TextBox Name="ContactEmailTextBox" Height="30" Padding="5" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Website URL" Foreground="#555" FontWeight="Bold"/>
+                <TextBox Name="WebsiteUrlTextBox" Height="30" Padding="5" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,10">
+                <Label Content="Address" Foreground="#555" FontWeight="Bold"/>
+                <TextBox Name="AddressTextBox" Height="30" Padding="5" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- ListView for Displaying Publishers -->
+        <ListView Name="PublishersListView" SelectionChanged="PublishersListView_SelectionChanged" Grid.Row="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Publisher ID" DisplayMemberBinding="{Binding PublisherId}" Width="100"/>
+                    <GridViewColumn Header="Publisher Name" DisplayMemberBinding="{Binding PublisherName}" Width="150"/>
+                    <GridViewColumn Header="Contact Email" DisplayMemberBinding="{Binding ContactEmail}" Width="150"/>
+                    <GridViewColumn Header="Website URL" DisplayMemberBinding="{Binding WebsiteUrl}" Width="150"/>
+                    <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}" Width="200"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Action Buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10" Grid.Row="2">
+            <Button Name="AddPublisherButton" Content="Add Publisher" Click="AddPublisherButton_Click" Width="100" Margin="0,0,10,0" Background="#28A745" Foreground="White" BorderBrush="#1C7430" BorderThickness="1"/>
+            <Button Name="UpdatePublisherButton" Content="Update Publisher" Click="UpdatePublisherButton_Click" Width="100" Margin="0,0,10,0" Background="#007ACC" Foreground="White" BorderBrush="#005B99" BorderThickness="1"/>
+            <Button Name="DeletePublisherButton" Content="Delete Publisher" Click="DeletePublisherButton_Click" Width="100" Background="#D9534F" Foreground="White" BorderBrush="#B52D30" BorderThickness="1"/>
+            <Button Name="CloseButton" Content="Close" Click="CloseButton_Click" Width="100" Background="#6C757D" Foreground="White" BorderBrush="#5A6268" BorderThickness="1"/>
+        </StackPanel>
+    </Grid>
+</Window>

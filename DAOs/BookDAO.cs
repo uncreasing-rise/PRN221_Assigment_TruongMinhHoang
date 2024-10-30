@@ -1,13 +1,12 @@
 ﻿using BusinessObjects;
 using BusinessObjects.Response;
-using Daos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DAOs
+namespace Daos
 {
     public class BookDAO
     {

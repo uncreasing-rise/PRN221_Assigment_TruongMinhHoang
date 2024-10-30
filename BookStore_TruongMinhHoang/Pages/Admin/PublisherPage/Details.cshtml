@@ -1,0 +1,49 @@
+﻿@page
+@model BookStore_TruongMinhHoang.Pages.Admin.PublisherPage.DetailsModel
+
+@{
+    ViewData["Title"] = "Publisher Details";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Publisher Details</h1>
+
+    <div class="card shadow mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Publisher Information</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Publisher.PublisherName)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Publisher.PublisherName)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Publisher.ContactEmail)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Publisher.ContactEmail)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Publisher.WebsiteUrl)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Publisher.WebsiteUrl)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Publisher.Address)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Publisher.Address)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="card-footer text-center">
+            <a asp-page="./Edit" asp-route-id="@Model.Publisher.PublisherId" class="btn btn-warning">Edit</a>
+            <a asp-page="./Index" class="btn btn-outline-secondary ms-2">Back to List</a>
+        </div>
+    </div>
+</div>

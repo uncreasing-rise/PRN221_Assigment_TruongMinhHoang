@@ -10,14 +10,14 @@ namespace BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage
     public class EditModel : PageModel
     {
         private readonly IBookRepo _bookRepo;
-        private readonly IPushlisherRepo _pushlisherRepo;
+        private readonly IPublisherRepo _publisherRepo;
         private readonly IAuthorRepo _authorRepo;
 
-        public EditModel(IBookRepo bookRepo, IAuthorRepo authorRepo, IPushlisherRepo pushlisherRepo)
+        public EditModel(IBookRepo bookRepo, IAuthorRepo authorRepo, IPublisherRepo pushlisherRepo)
         {
             _bookRepo = bookRepo;
             _authorRepo = authorRepo;
-            _pushlisherRepo = pushlisherRepo;   
+            _publisherRepo = pushlisherRepo;   
         }
 
         [BindProperty]
@@ -61,7 +61,7 @@ namespace BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage
         {
             // Retrieve authors and publishers
             var authors = await _authorRepo.GetAuthors();
-            var publishers = await _pushlisherRepo.GetPublishers();
+            var publishers = await _publisherRepo.GetPublishers();
 
             // Populate ViewData with authors
             ViewData["AuthorId"] = new SelectList(authors, "AuthorId", "LastName");

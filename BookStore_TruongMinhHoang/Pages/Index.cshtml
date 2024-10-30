@@ -1,27 +1,47 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Login";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Login</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h1 class="display-4">Login</h1>
+                </div>
+                <div class="card-body">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["Message"]</div>
+                    }
 
-    @if (TempData["Message"] != null)
-    {
-        <div class="text-danger">@TempData["Message"]</div>
-    }
-
-    <form method="post">
-        <div>
-            <label>Username:</label>
-            <input username="email" type="text" />
+                    <form method="post" asp-page-handler="Login">
+                        <div class="form-group">
+                            <label asp-for="Username" class="control-label">Email:</label>
+                            <input asp-for="Username" type="text" class="form-control" placeholder="Enter your email" required />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password" class="control-label">Password:</label>
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Enter your password" required />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <p class="small">Don't have an account? <a href="/Register">Register here</a></p>
+                </div>
+            </div>
         </div>
-        <div class="my-2">
-            <label>Password:</label>
-            <input name="password" type="password" />
-        </div>
-        <input type="submit" value="Login" />
-    </form>
-
+    </div>
 </div>
+
+<style>
+    /* Optional custom styles */
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+</style>

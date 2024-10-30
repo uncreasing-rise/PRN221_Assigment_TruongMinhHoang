@@ -47,7 +47,7 @@ namespace BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage
             var bookToDelete = await _bookRepo.GetBookById(id.Value);
             if (bookToDelete != null)
             {
-                await _bookRepo.DeleteBook(bookToDelete.BookId); // Assuming you have a method for deletion in your repo
+                await _bookRepo.DeleteBook(bookToDelete.BookId); 
             }
 
             return RedirectToPage("./Index");

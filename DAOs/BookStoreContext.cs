@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using BusinessObjects;
+using Microsoft.Extensions.Configuration;
 namespace Daos;
 
 public partial class BookStoreContext : DbContext
@@ -31,7 +31,6 @@ public partial class BookStoreContext : DbContext
     public virtual DbSet<Publisher> Publishers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer(GetConnectionString());
     private string GetConnectionString()
     {
@@ -40,6 +39,7 @@ public partial class BookStoreContext : DbContext
                 .AddJsonFile("appsettings.json", true, true).Build();
         return configuration["ConnectionStrings:DefaultConnectionString"];
     }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -51,9 +51,7 @@ public partial class BookStoreContext : DbContext
 
             entity.HasIndex(e => e.Username, "UQ__Account__536C85E4DA9A78E2").IsUnique();
 
-            entity.Property(e => e.AccountId)
-                .ValueGeneratedNever()
-                .HasColumnName("AccountID");
+            entity.Property(e => e.AccountId).HasColumnName("AccountID");
             entity.Property(e => e.PasswordHash).HasMaxLength(255);
             entity.Property(e => e.Role).HasMaxLength(50);
             entity.Property(e => e.Username).HasMaxLength(50);
@@ -65,9 +63,7 @@ public partial class BookStoreContext : DbContext
 
             entity.ToTable("Author");
 
-            entity.Property(e => e.AuthorId)
-                .ValueGeneratedNever()
-                .HasColumnName("AuthorID");
+            entity.Property(e => e.AuthorId).HasColumnName("AuthorID");
             entity.Property(e => e.Biography).HasColumnType("text");
             entity.Property(e => e.FirstName).HasMaxLength(50);
             entity.Property(e => e.LastName).HasMaxLength(50);
@@ -79,11 +75,15 @@ public partial class BookStoreContext : DbContext
 
             entity.ToTable("Book");
 
-            entity.HasIndex(e => e.Isbn, "UQ__Book__447D36EACD92FB5C").IsUnique();
+            entity.HasIndex(e => e.AuthorId, "IX_Book_AuthorId");
 
-            entity.Property(e => e.BookId)
-                .ValueGeneratedNever()
-                .HasColumnName("BookID");
+            entity.HasIndex(e => e.PublisherId, "IX_Book_PublisherId");
+
+            entity.HasIndex(e => e.Isbn, "UQ__Book__447D36EACD92FB5C")
+                .IsUnique()
+                .HasFilter("([ISBN] IS NOT NULL)");
+
+            entity.Property(e => e.BookId).HasColumnName("BookID");
             entity.Property(e => e.Description).HasColumnType("text");
             entity.Property(e => e.Genre).HasMaxLength(50);
             entity.Property(e => e.IsActive).HasDefaultValue(1);
@@ -108,13 +108,15 @@ public partial class BookStoreContext : DbContext
 
             entity.ToTable("Customer");
 
-            entity.HasIndex(e => e.AccountId, "UQ__Customer__349DA587F0DFF7E5").IsUnique();
+            entity.HasIndex(e => e.AccountId, "UQ__Customer__349DA587F0DFF7E5")
+                .IsUnique()
+                .HasFilter("([AccountID] IS NOT NULL)");
 
-            entity.HasIndex(e => e.Email, "UQ__Customer__A9D105348A38AE5D").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Customer__A9D105348A38AE5D")
+                .IsUnique()
+                .HasFilter("([Email] IS NOT NULL)");
 
-            entity.Property(e => e.CustomerId)
-                .ValueGeneratedNever()
-                .HasColumnName("CustomerID");
+            entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.AccountId).HasColumnName("AccountID");
             entity.Property(e => e.Address).HasColumnType("text");
             entity.Property(e => e.Email).HasMaxLength(255);
@@ -134,9 +136,9 @@ public partial class BookStoreContext : DbContext
 
             entity.ToTable("Order");
 
-            entity.Property(e => e.OrderId)
-                .ValueGeneratedNever()
-                .HasColumnName("OrderID");
+            entity.HasIndex(e => e.CustomerId, "IX_Order_CustomerID");
+
+            entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
             entity.Property(e => e.OrderDate)
                 .HasDefaultValueSql("(getdate())")
@@ -157,9 +159,11 @@ public partial class BookStoreContext : DbContext
 
             entity.ToTable("OrderItem");
 
-            entity.Property(e => e.OrderItemId)
-                .ValueGeneratedNever()
-                .HasColumnName("OrderItemID");
+            entity.HasIndex(e => e.BookId, "IX_OrderItem_BookID");
+
+            entity.HasIndex(e => e.OrderId, "IX_OrderItem_OrderID");
+
+            entity.Property(e => e.OrderItemId).HasColumnName("OrderItemID");
             entity.Property(e => e.BookId).HasColumnName("BookID");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.Price).HasColumnType("decimal(10, 2)");
@@ -179,11 +183,11 @@ public partial class BookStoreContext : DbContext
 
             entity.ToTable("Publisher");
 
-            entity.HasIndex(e => e.ContactEmail, "UQ__Publishe__FFA796CDFB84F4E6").IsUnique();
+            entity.HasIndex(e => e.ContactEmail, "UQ__Publishe__FFA796CDFB84F4E6")
+                .IsUnique()
+                .HasFilter("([ContactEmail] IS NOT NULL)");
 
-            entity.Property(e => e.PublisherId)
-                .ValueGeneratedNever()
-                .HasColumnName("PublisherID");
+            entity.Property(e => e.PublisherId).HasColumnName("PublisherID");
             entity.Property(e => e.Address).HasColumnType("text");
             entity.Property(e => e.ContactEmail).HasMaxLength(255);
             entity.Property(e => e.PublisherName).HasMaxLength(100);

@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects;
-using Daos;
 using Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage
 {
+    [Authorize(Roles = "Admin")] // Chỉ cho phép người dùng có vai trò "Admin"
+
     public class IndexModel : PageModel
     {
 

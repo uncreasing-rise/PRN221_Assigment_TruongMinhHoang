@@ -1,0 +1,10 @@
+﻿<Application x:Class="BookStoreWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BookStoreWPF"
+             StartupUri="Management.xaml">
+    <!-- Changed from MainWindow.xaml to Management.xaml -->
+    <Application.Resources>
+        <!-- Define global styles, resources, etc. here -->
+    </Application.Resources>
+</Application>

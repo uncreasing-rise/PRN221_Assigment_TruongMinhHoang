@@ -1,5 +1,4 @@
 ﻿using BusinessObjects;
-using Daos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,11 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAOs
+namespace Daos
 {
     public class AccountDAO
     {
-
         private readonly BookStoreContext _context;
         private static AccountDAO instance = null;
 
@@ -36,6 +34,6 @@ namespace DAOs
         {
             return await _context.Accounts.FirstOrDefaultAsync(acc => acc.Username == email && acc.PasswordHash == password);
         }
-
     }
+
 }

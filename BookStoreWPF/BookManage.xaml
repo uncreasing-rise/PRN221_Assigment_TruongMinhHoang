@@ -1,0 +1,71 @@
+﻿<Window x:Class="BookStoreWPF.BookManage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookStoreWPF"
+        mc:Ignorable="d"
+        Title="Book Manage" Height="831" Width="800"
+        Background="#F7F9FC">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="0,0,0,10">
+            <TextBlock FontSize="20" FontWeight="Bold" Text="Manage Books" Margin="0,0,0,20" HorizontalAlignment="Center" Foreground="#007ACC"/>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Title" Foreground="#555" FontWeight="Bold"/>
+                <TextBox x:Name="BookTitleTextBox" Margin="0,0,0,5" Padding="5" Height="30" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Author" Foreground="#555" FontWeight="Bold"/>
+                <ComboBox x:Name="AuthorComboBox" Margin="0,0,0,5" DisplayMemberPath="FirstName" SelectedValuePath="AuthorId" Height="30" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="ISBN" Foreground="#555" FontWeight="Bold"/>
+                <TextBox x:Name="ISBNTextBox" Margin="0,0,0,5" Padding="5" Height="30" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Price" Foreground="#555" FontWeight="Bold"/>
+                <TextBox x:Name="PriceTextBox" Margin="0,0,0,5" Padding="5" Height="30" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Stock" Foreground="#555" FontWeight="Bold"/>
+                <TextBox x:Name="StockTextBox" Margin="0,0,0,5" Padding="5" Height="30" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,15">
+                <Label Content="Publisher" Foreground="#555" FontWeight="Bold"/>
+                <ComboBox x:Name="PublisherComboBox" Margin="0,0,0,5" DisplayMemberPath="PublisherName" SelectedValuePath="PublisherId" Height="30" Background="#E6F0F7" BorderBrush="#007ACC" BorderThickness="1"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <Button Content="Add Book" Click="AddBookButton_Click" Width="100" Margin="0,0,10,0" Padding="5" Background="#28A745" Foreground="White" BorderBrush="#1C7430" BorderThickness="1"/>
+                <Button Content="Update Book" Click="UpdateBookButton_Click" Width="100" Margin="0,0,10,0" Padding="5" Background="#007ACC" Foreground="White" BorderBrush="#005B99" BorderThickness="1"/>
+                <Button Content="Delete Book" Click="DeleteBookButton_Click" Width="100" Padding="5" Background="#D9534F" Foreground="White" BorderBrush="#B52D30" BorderThickness="1"/>
+                <Button Content="Quit" Click="QuitButton_Click" Width="100" Padding="5" Background="#C82333" Foreground="White" BorderBrush="#B52D30" BorderThickness="1"/>
+            </StackPanel>
+        </StackPanel>
+
+        <ListView x:Name="BooksListView" Grid.Row="1" Margin="0,10,0,0" SelectionChanged="BooksListView_SelectionChanged" Background="#FFFFFF" BorderBrush="#CCCCCC" BorderThickness="1">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Title" DisplayMemberBinding="{Binding Title}" Width="150"/>
+                    <GridViewColumn Header="Author" DisplayMemberBinding="{Binding Author.FirstName}" Width="100"/>
+                    <GridViewColumn Header="ISBN" DisplayMemberBinding="{Binding Isbn}" Width="100"/>
+                    <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" Width="70"/>
+                    <GridViewColumn Header="Stock" DisplayMemberBinding="{Binding Stock}" Width="50"/>
+                    <GridViewColumn Header="Publisher" DisplayMemberBinding="{Binding Publisher.PublisherName}" Width="100"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>

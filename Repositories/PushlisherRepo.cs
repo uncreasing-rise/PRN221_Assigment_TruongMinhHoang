@@ -1,18 +1,37 @@
 ﻿using BusinessObjects;
-using DAOs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Daos;
 
 namespace Repositories
 {
-    public class PushlisherRepo : IPushlisherRepo
+    public class PublisherRepo : IPublisherRepo
     {
-        public Task<List<Publisher>> GetPublishers()
+
+      
+        public async Task<List<Publisher>> GetPublishers()
         {
-        return PushlisherDAO.Instance.GetPublishers();
+            return await PublisherDAO.Instance.GetPublishers();
+        }
+
+        public async Task<Publisher> GetPublisherById(int id)
+        {
+            return await PublisherDAO.Instance.GetPublisherById(id);
+        }
+
+        public async Task AddPublisher(Publisher publisher)
+        {
+            await PublisherDAO.Instance.AddPublisher(publisher);
+        }
+
+        public async Task UpdatePublisher(Publisher publisher)
+        {
+            await PublisherDAO.Instance.UpdatePublisher(publisher);
+        }
+
+        public async Task DeletePublisher(int id)
+        {
+            await PublisherDAO.Instance.DeletePublisher(id);
         }
     }
 }
