@@ -29,13 +29,13 @@ namespace BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage
 
         private async Task PopulateAuthorsAndPublishers()
         {
-            // Populate ViewData with authors and publishers
             var authors = await _authorRepo.GetAuthors();
             var publishers = await _publisherRepo.GetPublishers();
 
             ViewData["AuthorId"] = new SelectList(authors, "AuthorId", "LastName");
             ViewData["PublisherId"] = new SelectList(publishers, "PublisherId", "PublisherName");
         }
+
 
         [BindProperty]
         public Book Book { get; set; } = default!;
@@ -47,9 +47,17 @@ namespace BookStore_TruongMinhHoang.Pages.Admin.BookManagementPage
                 return Page();
             }
 
-            await _bookRepo.AddBook(Book); // Assuming you have an AddBookAsync method in IBookRepo
+            var existingBook = await _bookRepo.GetBookById(Book.BookId); // Assuming you have a method to check the ISBN
+            if (existingBook != null)
+            {
+                ModelState.AddModelError("Book.Isbn", "A book with this ISBN already exists.");
+                return Page();
+            }
 
+            await _bookRepo.AddBook(Book); // Ensure this is asynchronous
             return RedirectToPage("./Index");
         }
+
+
     }
 }
